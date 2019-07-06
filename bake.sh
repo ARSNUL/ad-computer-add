@@ -21,16 +21,15 @@ sed -i "s/__SEDWORKGROUPNAMECAP__/${SHORTNAME}/g" smb.conf.patch
 sed -i "s/__SEDFQDNCAP__/${FQDN}/g" sssd.conf
 
 # apply patches
-patch < krb5.conf.patch
-patch < smb.conf.patch
-patch < common-session.patch
+patch /etc/krb5.conf krb5.conf.patch
+patch /etc/samba/smb.conf smb.conf.patch
+patch /etc/pam.d/common-session common-session.patch
 cp sssd.conf /etc/sssd/
-
-
 chown root:root /etc/sssd/sssd.conf
 chmod 600 /etc/sssd/sssd.conf
 systemctl restart smbd.service nmbd.service chrony.service
 exit
+
 kinit Administrator ${PASS}
 systemctl restart smbd.service nmbd.service chrony.service sssd.service
 
