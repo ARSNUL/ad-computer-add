@@ -7,7 +7,6 @@ echo "Please supply fully capitalized Kerberos realm (EXAMPLECOM)"
 read SHORTNAME
 echo "Please supply password for administrator@${FQDN}"
 read -s ADMINPASS
-echo "ADMINPASS is '${ADMINPASS}'"
 
 
 export DEBIAN_FRONTEND=noninteractive
@@ -34,9 +33,14 @@ chmod 600 /etc/sssd/sssd.conf
 
 
 systemctl restart smbd.service nmbd.service chrony.service
-exit
 
-kinit Administrator ${PASS}
+
+echo "${ADMINPASS}" | kinit Administrator
 klist
+
+
 systemctl restart smbd.service nmbd.service chrony.service sssd.service
+
+
+getent passwd ekeyser
 
