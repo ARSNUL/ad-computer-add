@@ -7,6 +7,7 @@ echo "Please supply fully capitalized Kerberos realm (EXAMPLECOM)"
 read SHORTNAME
 echo "Please supply password for administrator@${FQDN}"
 read -s ADMINPASS
+echo "ADMINPASS is '${ADMINPASS}'"
 
 
 export DEBIAN_FRONTEND=noninteractive
