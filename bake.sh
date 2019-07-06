@@ -38,6 +38,7 @@ systemctl restart smbd.service nmbd.service chrony.service
 
 echo "${ADMINPASS}" | kinit Administrator
 klist
+net ads join -k
 
 
 systemctl restart smbd.service nmbd.service chrony.service sssd.service
